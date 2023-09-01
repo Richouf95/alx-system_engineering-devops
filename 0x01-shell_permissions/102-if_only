@@ -1,2 +1,2 @@
 #!/bin/bash
-if test "$(stat -c %U hello)" = "guillaume" -a "$(whoami)" = "guillaume" then sudo chown betty hello fi
+find . -name "hello" -user guillaume -exec chown betty {}
