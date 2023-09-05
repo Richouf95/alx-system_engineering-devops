@@ -1,2 +1,2 @@
 #!/bin/bash
-paste -d',' <(cut -d: -f1 /etc/passwd) <(cut -d: -f6 /etc/passwd) | sort
+paste -d$'\t' <(cut -d: -f1 /etc/passwd) <(cut -d: -f6 /etc/passwd) | sort
