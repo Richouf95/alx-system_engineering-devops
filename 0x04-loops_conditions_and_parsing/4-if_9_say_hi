@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# 10 times "Best School" with while loop
+
+x=0
+while [ $x -lt 10 ]
+do
+	if [ $x -eq 9 ]
+	then
+		echo "Hi"
+	fi
+	echo "Best School"
+	(( x++ ))
+done
