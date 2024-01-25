@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# for with list
+
+fileList=$(ls)
+
+for x in $fileList
+do
+	echo "$x" | cut -d '-' -f2
+done
