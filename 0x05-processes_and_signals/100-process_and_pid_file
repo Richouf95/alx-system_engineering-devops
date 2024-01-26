@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Process and PID file
+
+myscript="/var/run/myscript.pid"
+
+echo "$$" > "$myscript"
+
+while (( 1 ))
+do
+	trap 'echo "Y U no love me?!"' SIGINT
+	trap 'echo "I hate the kill command"; rm "$myscript"; exit' SIGTERM
+	trap 'rm "$myscript"; exit' SIGQUIT
+	echo "To infinity and beyond"
+	sleep 2
+done
+
