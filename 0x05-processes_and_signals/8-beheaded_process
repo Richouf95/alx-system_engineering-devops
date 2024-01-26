@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Stop me if you can Beheaded process
+
+pkill -f -9 7-highlanderd
