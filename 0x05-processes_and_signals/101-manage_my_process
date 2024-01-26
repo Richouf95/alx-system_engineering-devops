@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Manage my process
+
+my_process_pid="/var/run/my_process.pid"
+
+if [ "${1}" == "start" ]
+then
+	./manage_my_process & echo "$!" > "$my_process_pid"
+	echo "manage_my_process started"
+elif [ "${1}" == "stop" ]
+then
+	echo "manage_my_process stopped"
+	kill "$(cat $my_process_pid)"
+	rm "$my_process_pid"
+elif [ "${1}" == "restart" ]
+then
+	./manage_my_process & echo "$!" > "$my_process_pid"
+	echo "manage_my_process restarted"
+else
+	echo "Usage: manage_my_process {start|stop|restart}"
+fi
