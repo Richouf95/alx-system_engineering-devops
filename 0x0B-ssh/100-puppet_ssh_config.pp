@@ -1,6 +1,9 @@
 # config ssh client
 
 
+include stdlib
+
+
 # replace the ssh private key entry
 file_line {'change private key source':
   path               => '/etc/ssh/ssh_config',
