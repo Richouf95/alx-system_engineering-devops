@@ -11,4 +11,4 @@ file_path=$1
 user_name=$3
 server_ip=$2
 
-scp -i "$key" "$file_path" "$user_name@$server_ip:~"
+scp -o StrictHostKeyChecking=no -i "$key" "$file_path" "$user_name@$server_ip:~"
