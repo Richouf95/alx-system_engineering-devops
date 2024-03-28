@@ -1,24 +1,28 @@
-# with puppet exceute some command on a server
-
-exec {'update':
+# exécutez une commande sur un serveur
+exec { 'update':
   command => '/usr/bin/apt-get update'
 }
 
-package {'install nginx':
+# installez nginx
+package { 'nginx':
   ensure  => 'installed',
-  require => Exec['update system']
+  require => Exec['update']
 }
 
-file {'/var/www/html/index.html':
+# créez un fichier HTML simple
+file { '/var/www/html/index.html':
   content => 'Hello World!'
 }
 
-exec {'redirection':
-  command  => 'sed -i "24i\	rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
+# Ajoutez une redirection dans la configuration nginx
+exec { 'redirection':
+  command  => 'sed -i "24i\     rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default',
   provider => 'shell'
 }
 
-service {'lauch nginx server':
-  ensure  => running,
+# Démarrez le service nginx
+service { 'nginx':
+  ensure  => 'running',
   require => Package['nginx']
 }
+
