@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# install and config load balance
+
+# update and upgrade (apt-get)
+apt-get -y update
+apt-get -y upgrade
+
+# HAProxy
+
+## Install software-properties-common
+apt-get -y install software-properties-common
+
+## Install ppa:vbernat/haproxy-2.5
+add-apt-repository -y ppa:vbernat/haproxy-2.5
+
+## upgrade
+apt-get -y update
+
+## install HAProxy
+apt-get -y install haproxy
+cp -a /etc/haproxy/haproxy.cfg{,.orig}
+
+## Config the balance
+printf %s "
+frontend haproxy_balancer
+    bind *:80
+    mode http
+    default_backend webservers
+    
+backend webservers
+    balance roundrobin
+    server 5027-web-01 34.232.66.220:80 check
+    server 5027-web-02 35.153.193.79:80 check
+" >> /etc/haproxy/haproxy.cfg
+
+## Restart the nginx server
+service haproxy restart
