@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 echo -e "Start UFW process...\n"
 
 echo -e "\n**************\nUpdate apt-get\n**************\n"
