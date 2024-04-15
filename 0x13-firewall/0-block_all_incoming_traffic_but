@@ -1,0 +1,37 @@
+echo -e "Start UFW process...\n"
+
+echo -e "\n**************\nUpdate apt-get\n**************\n"
+
+sudo apt-get update
+
+echo -e "\n**************\nInstall UFW\n**************\n"
+
+sudo apt-get install -y ufw
+
+echo -e "\n**************\nConfig ufw...\n**************\n"
+
+echo -e "=> Allow outgoing\n"
+
+sudo ufw default allow outgoing
+
+echo -e "=> Deny incoming\n"
+
+sudo ufw default deny incoming
+
+echo -e "=> Allow incoming on Port 22\n"
+
+sudo ufw allow 22
+
+echo -e "=> Allow incoming on Port 443\n"
+
+sudo ufw allow 443
+
+echo -e "=> Allow incoming on Port 80\n"
+
+sudo ufw allow 80
+
+echo -e "=> Activate Firwall config\n"
+
+sudo ufw enable
+
+echo -e "\n**************\nAll Done\n**************\n"
