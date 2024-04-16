@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Run Nginx as Nginx
+
+# Change permission
+chmod 644 /etc/nginx/nginx.conf
+
+# Change user to ngnix
+sed -Ei 's/\s*#?\s*user .*/user nginx;/' /etc/nginx/nginx.conf
+
+# Listen on 8080
+sed -Ei 's/(listen (\[::\]:)?80) /\180 /' /etc/nginx/sites-enabled/default
+
+# kill server
+pkill apache2
+
+# # restart ngnix
+su nginx -s /bin/bash -c 'service nginx restart'
