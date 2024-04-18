@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # make a Nginx server listen on 80 port
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
-kill "$(pgrep 'nginx' | head -1)"
 service nginx start
+kill "$(pgrep 'nginx' | head -1)"
