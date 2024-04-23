@@ -1,24 +1,45 @@
 #!/usr/bin/python3
-""" Export api to csv"""
-import csv
-import requests
+"""
+Gather data from an API
+"""
+
 import sys
+import requests
+import csv
+
+base_url = "https://jsonplaceholder.typicode.com"
+employee_id = sys.argv[1]
+
+# get employee
+employee = requests.get("{}/users/{}".format(
+    base_url, employee_id)).json()
+
+# get todo list
+todo_list = requests.get(
+    "{}/todos".format(base_url),
+    {"userId": employee_id}
+    ).json()
+
+# get employee name
+employee_name = employee.get("username")
+
+# filter completed task
+completed = []
+for todo in todo_list:
+    if todo.get('completed') is True:
+        completed.append(todo.get('title'))
+
+x_completed = len(completed)
+x_todos = len(todo_list)
 
 if __name__ == '__main__':
-    user = sys.argv[1]
-    url_user = 'https://jsonplaceholder.typicode.com/users/' + user
-    res = requests.get(url_user)
-    """ANYTHING"""
-    user_name = res.json().get('username')
-    task = url_user + '/todos'
-    res = requests.get(task)
-    tasks = res.json()
-
-    with open('{}.csv'.format(user), 'w') as csvfile:
-        for task in tasks:
-            completed = task.get('completed')
-            """Complete"""
-            title_task = task.get('title')
-            """Done"""
-            csvfile.write('"{}","{}","{}","{}"\n'.format(
-                user, user_name, completed, title_task))
+    # create and save data in csv file
+    with open("{}.csv".format(employee_id), "w", newline="") as fichier:
+        writer = csv.writer(fichier, quoting=csv.QUOTE_ALL)
+        for task in todo_list:
+            writer.writerow([
+                employee_id,
+                employee_name,
+                task.get("completed"),
+                task.get("title")
+                ])

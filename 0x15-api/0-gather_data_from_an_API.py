@@ -10,7 +10,7 @@ base_url = "https://jsonplaceholder.typicode.com"
 employee_id = sys.argv[1]
 
 # get employee
-employee = requests.get("{}/user/{}".format(
+employee = requests.get("{}/users/{}".format(
     base_url, employee_id)).json()
 
 # get todo list
