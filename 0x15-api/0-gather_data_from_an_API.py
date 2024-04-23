@@ -1,10 +1,9 @@
 #!/usr/bin/python3
-"""
-Gather data from an API
-"""
+"""Gather data from an API"""
 
 import sys
 import requests
+
 
 base_url = "https://jsonplaceholder.typicode.com"
 employee_id = sys.argv[1]
