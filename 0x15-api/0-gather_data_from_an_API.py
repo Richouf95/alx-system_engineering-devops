@@ -4,8 +4,8 @@
     using requests
 """
 
-import sys
 import requests
+import sys
 
 
 base_url = "https://jsonplaceholder.typicode.com"
