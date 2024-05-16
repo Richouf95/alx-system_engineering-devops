@@ -1,0 +1,15 @@
+[Unit]
+Description = hbnb gunicorn instance
+After = network.target
+
+[Service]
+User = ubuntu
+WorkingDirectory = /home/ubuntu/AirBnB_clone_v4
+ExecStart = gunicorn --workers 3 --bind 0.0.0.0:5003 web_dynamic.2-hbnb:app --error-logfile /tmp/hbnb-error.log
+Restart = always
+StandardOutput = append:/tmp/hbnb-access.log
+StandardError = append:/tmp/hbnb-error.log
+SyslogIdentifier = gunicorn
+
+[Install]
+WantedBy = multi-user.target
